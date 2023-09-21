@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="icon" type="png" href="../images/googleLogo0.png">
+    <title>Google</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="googleImages.html"> Google Images</a></li>
+            <li><a href="googleAdvanced.html">Advanced Google Search</a></li>
+        </ul>
+    </nav>  
+    <div id="google-search-container">
+        <img src="../images/googleLogo1.png" class="google-logo">
+        <form action="https://www.google.com/search">
+            <div id="google-search-box-container"> <!--this is google-search-box-->
+                <div><img src="../images/search.png" id="search-icon"></div>
+                <div><input type="text" name="q" id="google-search-box"></div>
+            </div> <br>
+            <div id="google-buttons">
+                <button type="submit" id="google-search-button">Google Search</button>
+                <button type="button" onclick="luckyLink()" id="google-feelinglucky-button">I'm Feeling Lucky</button>
+                <script>
+                    function luckyLink() {
+                    window.location.href = 'https://www.google.com/doodles';
+                    }
+                </script>
+            </div>  
+        </form>
+    </div>
+</body>
+</html>

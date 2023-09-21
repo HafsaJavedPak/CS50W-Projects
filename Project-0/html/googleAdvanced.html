@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styles-googleadvancedsearch.css">
+    <title>Google Advanced Search</title>
+</head>
+<body>
+    <header>
+        <nav><a href="index.html"><img src="../images/googleLogo1.png" class="google-logo""></a></nav>
+        <h1>Advanced Search</h1>
+    </header>
+    <main>
+        <div id="google-advancedsearch-container">
+            <h2>Find pages with...</h2>
+            <form action="https://www.google.com/search">
+                <div class="google-advancedsearch-rows">
+                    <div><label for="all-words">all these words:</label></div>
+                    <div><input type="text" id="all-words" name="q"></div>
+                    <div>Type the important words: <span class="col-3-fontchange">tri-colour rat terrier</span></div>
+                </div>
+                <div class="google-advancedsearch-rows">
+                    <div><label for="exact-words">this exact word or phrase:</label></div>
+                    <div><input type="text" id="exact-words" name="as_epq"></div>
+                    <div>Put exact words in quotes: <span class="col-3-fontchange">"rat terrier"</span></div>
+                </div>
+                <div class="google-advancedsearch-rows">
+                    <div><label for="any-words">any of these words:</label></div>
+                    <div><input type="text" id="any-words" name="as_oq"></div>
+                    <div>Type <span class="col-3-fontchange">OR</span> between all the words you want: <span class="col-3-fontchange">miniature OR standard</span></div>
+                </div>
+                <div class="google-advancedsearch-rows">
+                    <div><label for="none-words">none of these words:</label></div>
+                    <div><input type="text" id="none-words" name="as_eq"></div>
+                    <div>Put a minus sign just before words that you don't want:<span class="col-3-fontchange"> -rodent, -"Jack Russell"</span></div>
+                </div>
+                <div class="google-advancedsearch-rows">
+                    <div><label for="min-num">numbers ranging from:</label></div>
+                    <div class="google-advancedsearch-rows-subflex">
+                        <div id="divfor-min-num"><input type="text" id="min-num" name="as_nlo"></div>
+                        <div id="divfor-labelof-max-num"><label for="max-num">to</label></div>
+                        <div id="divfor-max-num"><input type="text" id="max-num" name="as_nhi"></div>
+                    </div>
+                    <div>Put two full stops between the numbers and add a unit of measurement:<span class="col-3-fontchange"> 10..35 kg, £300..£500, 2010..2011</span></div>
+                </div>
+                <div class="google-advancedsearch-rows">
+                    <div></div>
+                    <div><button type="submit">Advanced Search</button></div>
+                </div>
+            </form>
+        </div>
+        
+        
+    </main>
+</body>
+</html>

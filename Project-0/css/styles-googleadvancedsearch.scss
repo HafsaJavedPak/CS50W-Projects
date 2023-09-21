@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans&family=PT+Sans+Caption&family=PT+Sans+Narrow&display=swap');
+
+body {
+    font-family: arial,sans-serif;
+}
+
+.google-logo {
+    margin: 15px;
+    width : 75px;
+    height: auto;
+}
+
+$my-gray :#dfe1e5;
+header {
+    margin: 0px;
+    padding: 0px;
+    border-bottom: 1px solid $my-gray;
+    h1 {
+        margin: 35px;
+        margin-bottom: 20px;
+        margin-top: 20px;
+        color: #dc443a;
+        font-size: 1.25em;
+        font-weight :100;
+    }
+}
+
+#google-advancedsearch-container {
+    h2 {
+        margin: 35px;
+        margin-bottom: 10px;
+        padding: 10px;
+        font-weight: 200;
+        font-size: 1em;
+    }
+    > form{
+        padding: 15px;
+        // margin: 25px;
+        display: grid;
+        // grid-row: 5;
+        grid-template-columns: 1fr;
+}
+}
+
+.google-advancedsearch-rows {
+    padding-left: 30px;
+    padding-right: 30px;
+    display: grid;
+    @media (min-width:1000px) {
+        grid-template-columns: 0.82fr 3fr 1.5fr;
+    }
+    @media (max-width:999px) {
+        grid-template-columns: 19.5vw 50.75vw ;
+    }
+    gap: 15px;
+    input {
+        height: 25px;
+        width: 50vw;
+        height: 25px;
+        border: 1px solid #d9d9d9;
+    }
+    input:focus {
+        outline: 1px solid #4D90FE;
+        box-shadow: $my-gray;
+    }
+    > div {
+        margin-bottom: 15px;
+    }
+
+    // changing font sizes
+    label {
+        font-size: 0.8em;
+    }
+    > div:nth-child(3) {
+        font-family: "PT Sans Narrow", monospace;
+        font-size: 0.78em;
+        color: #616161;
+        @media (max-width:1000px) {
+            display: none;
+        }
+        span {
+            font-family: monospace;
+        }
+    }
+}
+
+$font-color-1 : #222222;
+.google-advancedsearch-rows-subflex {
+    display: grid;
+    // grid-template-columns: 0.7fr auto 0.7fr;
+    grid-template-columns: 23vw 4.75vw 23vw;
+    // grid-template-columns: 45% 10% 45%;
+    align-items: baseline;
+    input {
+        width: 100%;
+    }
+    #divfor-min-num, #divfor-max-num {
+        padding: 0px 25px 0px 0px;
+    }
+    #divfor-max-num {
+        padding-right: 8px;
+    }
+    @media (max-width:999px) {
+        width: auto;
+        #divfor-max-num {
+            padding-right: 0px;
+        }
+    }
+    #divfor-labelof-max-num {
+        padding: 0px 15px 0px 15px; /* Add padding to label */
+    }
+}
+
+// .google-advancedsearch-rows-subflex {
+//     label {
+//         color: $font-color-1;
+//     }
+//     width: 100%;
+//     display: table; 
+//     vertical-align: baseline;
+//     div {
+//         display: table-cell;
+//         vertical-align: baseline;
+//     }
+//     input {
+//         width: 100%;
+//     }
+//     #divfor-min-num, #divfor-max-num {
+//         padding-right: 25px;
+//     }
+//     #divfor-max-num {
+//         width:calc(100% + 10px);
+//     }
+//     #divfor-labelof-max-num {
+//         padding-right: 15px;
+//         padding-left: 15px;
+//     }
+// }
+
+button {
+    margin: 10px;
+    background-color: #357ae8;
+    color: white;
+    border: 1px solid #2f5bb7;
+    border-radius: 2px;
+    outline: 0;
+    font-family: arial,sans-serif;
+    width: 120px;
+    height: 30px;
+    float: right;
+}

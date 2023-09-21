@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow&display=swap');
+
+body{
+    font-family: arial,sans-serif;
+}
+
+$my-gray :#dfe1e5;
+
+
+nav {
+    margin: 20px;
+    text-align: right;
+    // font-family: 'PT Sans Narrow'  ;
+    font-size: 80%;
+    li {
+        list-style: none;
+        display: inline-flex;
+    }
+    a {
+        color: #202124;
+        text-decoration: none;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+}
+
+.google-logo {
+    width: 300px;
+    height: auto;
+    margin: 20px;
+}
+
+#google-search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#google-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    #google-search-button, #google-feelinglucky-button {
+        margin : 10px;
+        margin-left: 0px;
+        align-self: auto;
+        width: 125px;
+        height: 37px;
+        border: none;
+        border-radius: 5px;
+        background-color: #F8F9FA;
+        color :#3F4147;
+        font-size: 0.85em;
+    }    
+    #google-search-button:hover, #google-feelinglucky-button:hover {
+        border: 1px solid #DADCE0;
+        // align-self: flex-start; 
+    }
+}
+
+$search-box-width : 590px;
+$search-box-height : 45px;
+#google-search-box-container {
+    height: $search-box-height;    
+    // widths
+    @media (min-width:600px) {
+        width: $search-box-width;
+    }
+    @media (max-width:599px) {
+        margin: 10px;
+        width: 90vw;
+    }
+    padding :2px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+    border: 1px solid $my-gray;
+    border-radius: 30px;
+    #search-icon {
+        margin: 7px;
+        margin-left: 11px;
+        width: 17px;
+        height: auto;
+    }    
+    #google-search-box {
+        border: none;
+        height: $search-box-height - 7px;
+        @media (min-width:600px) {
+            width: calc($search-box-width - 50px);
+        }
+        @media (max-width:599px) {
+            width: calc(90vw - 50px);
+
+        }
+    }
+}
+
+#google-search-box:focus {
+        outline: none;
+}
+#google-search-box-container:hover {
+    box-shadow: 0 0 10px $my-gray;
+}
