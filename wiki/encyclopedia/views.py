@@ -71,6 +71,7 @@ def create_page(request, save_page_ifExists = None) :
     elif request.method == "POST" and save_page_ifExists != "yes":
         if form.is_valid():
             title = form.cleaned_data["title"]
+            title = title.strip()
             content = form.cleaned_data["text"]
             request.session["title-body"] = title
             request.session["content-body"] = content
@@ -113,6 +114,7 @@ def edit_page(request, route) :
 # Searching for a page
 def search(request) :
     title = request.GET.get("q","")
+    title = title.strip()
     exact_entry = title if util.get_entry(title) else None
     if request.method == "GET" :
         want_all_entries = False
