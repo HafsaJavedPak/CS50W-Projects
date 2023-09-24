@@ -6,30 +6,51 @@
     <head>
         <title>{% block title %}{% endblock %}</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link href="{% static 'encyclopedia/styles.css' %}" rel="stylesheet">
+        <link href="{% static 'encyclopedia/layout-styles.css' %}" rel="stylesheet">
     </head>
+    
+    
     <body>
+        <!-- <script src="{% static 'encyclopedia/index.js' %}"></script> -->
         <div class="row">
-            <div class="sidebar col-lg-2 col-md-3">
-                <h2>Wiki</h2>
-                <form>
-                    <input class="search" type="text" name="q" placeholder="Search Encyclopedia">
-                </form>
-                <div>
-                    <a href="{% url 'index' %}">Home</a>
+            <div class="sidebar">
+                <div class="around-mini-banner"><div id="mini-banner">
+                    <a href="{% url 'index'%}"><h2><img src="../../static/encyclopedia/logo.png" title="Home"><span> My Wiki</span></h2></a>
+                </div></div>
+                <div class="sidebar-subgrid">
+                    <div class="side-links">
+                        <div>
+                            <a href="{% url 'newpage'%}"><img src="../../static/encyclopedia/new.png" title="New Page"></a>
+                        </div>
+                        <div>
+                            <a href="{% url 'all' %}"><img src="../../static/encyclopedia/all.png" title="All Pages"></a>
+                        </div>
+                        <div>
+                            <a href="{% url 'random'%}"><img src="../../static/encyclopedia/random.png" title="All Pages"></a>
+                        </div>
+                    </div>
+                    <div class="all_pages">
+                        <div class="small-search-box"><form action="{% url 'search'%}" method="get">
+                            <input id="search-box" class="search" type="text" name="q" placeholder="Search Your Wiki :)">
+                        </form></div>
+                        <div>
+                            <ul>
+                                {% for entry in entries %}
+                                    <li><a href="{% url 'page' entry %}">{{ entry }}</a></li>
+                                {% endfor %}                            
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    Create New Page
-                </div>
-                <div>
-                    Random Page
-                </div>
+
                 {% block nav %}
                 {% endblock %}
             </div>
-            <div class="main col-lg-10 col-md-9">
-                {% block body %}
-                {% endblock %}
+            <div class="main">
+                <div class="bodycontent">
+                    {% block body %}
+                    {% endblock %}
+                </div>
             </div>
         </div>
 
