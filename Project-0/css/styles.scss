@@ -11,10 +11,16 @@ nav {
     margin: 20px;
     text-align: right;
     // font-family: 'PT Sans Narrow'  ;
+    display: flex;
+    justify-content: space-between;
+    text-align: right;
     font-size: 80%;
+    width: 100%;
     li {
         list-style: none;
-        display: inline-flex;
+    }
+    li:last-child {
+        float: right;
     }
     a {
         color: #202124;

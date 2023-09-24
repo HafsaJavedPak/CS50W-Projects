@@ -6,6 +6,7 @@
     <head>
         <title>{% block title %}{% endblock %}</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="icon" type="png" href="../../static/encyclopedia/logo.png">
         <link href="{% static 'encyclopedia/layout-styles.css' %}" rel="stylesheet">
     </head>
     
@@ -29,11 +30,11 @@
                             <a href="{% url 'random'%}"><img src="../../static/encyclopedia/random.png" title="All Pages"></a>
                         </div>
                     </div>
-                    <div class="all_pages">
+                    <div class="around-all_pages">
                         <div class="small-search-box"><form action="{% url 'search'%}" method="get">
                             <input id="search-box" class="search" type="text" name="q" placeholder="Search Your Wiki :)">
                         </form></div>
-                        <div>
+                        <div class="all_pages">
                             <ul>
                                 {% for entry in entries %}
                                     <li><a href="{% url 'page' entry %}">{{ entry }}</a></li>

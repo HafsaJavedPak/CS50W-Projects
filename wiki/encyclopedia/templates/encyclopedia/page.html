@@ -6,7 +6,13 @@
 
 {% block body %}
     <header class="title-head">
-        {{title}}
+        <nav>
+            <ul>
+                <li>{{title}}</li>
+                <li><a href="{% url 'edit' title%}">Edit</a></li>
+            </ul>
+            
+        </nav>
     </header>
     <div>
         {{ content|safe }}

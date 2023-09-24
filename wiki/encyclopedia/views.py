@@ -9,13 +9,18 @@ import random
 
 class new_form(forms.Form) :
     title = forms.CharField(
+        initial="",
         widget=forms.TextInput(attrs={'placeholder': 'Enter Page title'}), 
-        label='')
-    text = forms.CharField(widget=forms.Textarea(attrs={
+        label=''
+        )
+    text = forms.CharField(
+        initial="",
+        widget=forms.Textarea(attrs={
         "placeholder" : "Enter text here" , 
         # "rows":5, "cols":5,
         }),
-        label="")
+        label="",
+        ) 
 
 all_entries = util.list_entries(True) 
 # Home page
@@ -32,52 +37,89 @@ def all_pages(request):
 
 
 # page url
-def return_by_title(request, route):
+def return_by_title(request, route, return_webpage=True):
     # page_exists is a bool
     page_exists = None
     # Return by exact title
-    if util.get_entry(route) :
-        page_exists = True
-        return render(request, "encyclopedia/page.html", {
-            "content" : markdown2.markdown(util.get_entry(route)), "title" : route, "page_exists" : page_exists, "entries" : all_entries 
-        })
+    if util.get_entry(route):
+        if return_webpage :
+            page_exists = True
+            return render(request, "encyclopedia/page.html", {
+                "content" : markdown2.markdown(util.get_entry(route)), "title" : route, "page_exists" : page_exists, "entries" : all_entries 
+            })
+        else :
+            return util.get_entry(route)
+
+# Display warning page
+def warning(request) :
+    return render(request, "encyclopedia/warningpage.html", {
+        "entries" : all_entries 
+    })
 
 # Creating Page
-def create_page(request) :
+def create_page(request, save_page_ifExists = None) :
     form = new_form(request.POST)
-    if request.method == "GET" :
+    if "title-body" not in request.session :
+        request.session["title-body"] = []
+    if "content-body" not in request.session :
+        request.session["content-body"] = []
+    if request.method == "GET" and save_page_ifExists != "yes" and save_page_ifExists !="no":
         page_exists = True
         return render(request, "encyclopedia/newpage.html", {
             "form" : form , "entries" : all_entries 
         })
-    elif request.method == "POST" :
+    elif request.method == "POST" and save_page_ifExists != "yes":
         if form.is_valid():
             title = form.cleaned_data["title"]
             content = form.cleaned_data["text"]
-            util.save_entry(title,content)
-            if util.get_entry(title) :
-                return HttpResponseRedirect(reverse('page',args=[title]))
+            request.session["title-body"] = title
+            request.session["content-body"] = content
+            if util.get_entry(title) and save_page_ifExists!= "ignore" :
+                # to ask user if they want to replace the page with identitcal title
+                return HttpResponseRedirect(reverse('warning'))
             else :
-                return HttpResponse("<h1>ERROR</h1>")
+                util.save_entry(request.session["title-body"],request.session["content-body"])
+                return HttpResponseRedirect(reverse('page',args=[title]))
+    
+    # yes, replace page with identitcal title
+    elif save_page_ifExists =="yes" :
+        util.save_entry(request.session["title-body"],request.session["content-body"])
+        return HttpResponseRedirect(reverse('page',args=[request.session["title-body"]]))
+    
+    # no, don't replace page with identitcal title
+    elif save_page_ifExists =="no" :
+        # return HttpResponse(f'{request.session["title-body"]}')
+        form.fields['title'].initial = request.session["title-body"]
+        form.fields['text'].initial = request.session["content-body"]
+        return render(request, "encyclopedia/newpage.html", {
+            "form" : form , "entries" : all_entries 
+        })
     else:
         form = new_form()
-
     return render(request, "encyclopedia/newpage.html", {
         "form": form, "entries" : all_entries 
         })
 
 # Editing a page
-def edit_page(request) :
-    return HttpResponse("hi")
+def edit_page(request, route) :
+    return_webpage = False
+    edit_form  = new_form()
+    edit_form.fields['title'].initial = route
+    edit_form.fields['text'].initial = return_by_title(request, route, return_webpage)
+    return render(request, "encyclopedia/newpage.html", {
+            "form" : edit_form , "entries" : all_entries , "ignoreWarning" : True
+    })
 
 # Searching for a page
 def search(request) :
     title = request.GET.get("q","")
+    exact_entry = title if util.get_entry(title) else None
     if request.method == "GET" :
         want_all_entries = False
         page_exists = False
         return render(request, "encyclopedia/all_pages.html", {
             "search_entries" : util.list_entries(want_all_entries, title) , 
+            "exact_entry" : exact_entry,
             "title" : title, 
             "page_exists" : page_exists, 
             "entries" : all_entries,

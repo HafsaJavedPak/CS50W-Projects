@@ -13,7 +13,7 @@ def list_entries(all_entries, part_of_title=None):
     if all_entries == True:
         sorted_filenames = [re.sub(r"\.md$", "", filename) for filename in sorted_filenames if filename.endswith(".md")]
         return sorted_filenames
-    else :
+    elif part_of_title !=None :
         sorted_filenames = [re.sub(r"\.md$", "", filename) for filename in sorted_filenames if (filename.endswith(".md")  and part_of_title.lower() in filename.lower())]
         return sorted_filenames
 
