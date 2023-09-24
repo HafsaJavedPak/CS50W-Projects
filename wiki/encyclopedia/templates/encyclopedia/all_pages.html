@@ -18,7 +18,9 @@
             {% endfor %}
         {% else %}
         <h1>Your Pages</h1>
-            <li><a href="{% url 'page' exact_entry %}"><strong>{{ exact_entry }}</strong></a></li>
+            {% if exact_entry != None%}
+                <li><a href="{% url 'page' exact_entry %}"><strong>{{ exact_entry }}</strong></a></li>
+            {% endif %}
             {% for entry in search_entries%}
                 <li><a href="{% url 'page' entry %}">{{ entry }}</a></li>
             {% endfor %}
